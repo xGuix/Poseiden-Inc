@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RatingService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.service</a>
+</div>
+
+<h1>Coverage Summary for Class: RatingService (com.nnk.springboot.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RatingService</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RatingService$$EnhancerBySpringCGLIB$$d719f499</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.nnk.springboot.service;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.nnk.springboot.domain.Rating;
+<i class="no-highlight">4</i>&nbsp;import com.nnk.springboot.repositories.RatingRepository;
+<i class="no-highlight">5</i>&nbsp;import org.apache.logging.log4j.LogManager;
+<i class="no-highlight">6</i>&nbsp;import org.apache.logging.log4j.Logger;
+<i class="no-highlight">7</i>&nbsp;import org.hibernate.ObjectNotFoundException;
+<i class="no-highlight">8</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i class="no-highlight">9</i>&nbsp;import org.springframework.stereotype.Service;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import javax.transaction.Transactional;
+<i class="no-highlight">12</i>&nbsp;import java.util.List;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;/**
+<i class="no-highlight">15</i>&nbsp; * Rating Service class
+<i class="no-highlight">16</i>&nbsp; */
+<i class="no-highlight">17</i>&nbsp;@Service
+<i class="no-highlight">18</i>&nbsp;@Transactional
+<b class="fc"><i class="no-highlight">19</i>&nbsp;public class RatingService</b>
+<i class="no-highlight">20</i>&nbsp;{
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     *  Load Rating Repository
+<i class="no-highlight">23</i>&nbsp;     */
+<i class="no-highlight">24</i>&nbsp;    @Autowired
+<i class="no-highlight">25</i>&nbsp;    RatingRepository ratingRepository;
+<i class="no-highlight">26</i>&nbsp;
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    private static final Logger logger = LogManager.getLogger(&quot;RatingServiceLog&quot;);</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * Find list of all ratings :
+<i class="no-highlight">31</i>&nbsp;     * Call to find rating in repository
+<i class="no-highlight">32</i>&nbsp;     *
+<i class="no-highlight">33</i>&nbsp;     * @return ratingList The ratings list
+<i class="no-highlight">34</i>&nbsp;     */
+<i class="no-highlight">35</i>&nbsp;    public List&lt;Rating&gt; findAll()
+<i class="no-highlight">36</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        logger.info(&quot;Find all rating list&quot;);</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        return ratingRepository.findAll();</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * Find rating with id:
+<i class="no-highlight">43</i>&nbsp;     * Call to find a specific rating in repository
+<i class="no-highlight">44</i>&nbsp;     *
+<i class="no-highlight">45</i>&nbsp;     * @param id Integer id
+<i class="no-highlight">46</i>&nbsp;     * @return Rating The rating id
+<i class="no-highlight">47</i>&nbsp;     */
+<i class="no-highlight">48</i>&nbsp;    public Rating findById(Integer id)
+<i class="no-highlight">49</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        logger.info(&quot;Find rating by id: {}&quot;, id);</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        return ratingRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;Rating&quot;, &quot;id&quot;));</b>
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;    /**
+<i class="no-highlight">55</i>&nbsp;     * Save rating:
+<i class="no-highlight">56</i>&nbsp;     * Call to save ratings in repository
+<i class="no-highlight">57</i>&nbsp;     *
+<i class="no-highlight">58</i>&nbsp;     * @param rating Rating rating
+<i class="no-highlight">59</i>&nbsp;     * @return Rating The new rating save
+<i class="no-highlight">60</i>&nbsp;     */
+<i class="no-highlight">61</i>&nbsp;    public Rating save(Rating rating)
+<i class="no-highlight">62</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        logger.info(&quot;Save rating with id: {}&quot;, rating.getId());</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;        return ratingRepository.save(rating);</b>
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;
+<i class="no-highlight">67</i>&nbsp;    /**
+<i class="no-highlight">68</i>&nbsp;     * Delete rating with id:
+<i class="no-highlight">69</i>&nbsp;     * Call to delete rating in repository
+<i class="no-highlight">70</i>&nbsp;     *
+<i class="no-highlight">71</i>&nbsp;     * @param id Integer rating id
+<i class="no-highlight">72</i>&nbsp;     * @Return Void No return
+<i class="no-highlight">73</i>&nbsp;     */
+<i class="no-highlight">74</i>&nbsp;    public void delete(Integer id)
+<i class="no-highlight">75</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">76</i>&nbsp;        Rating ratingToDelete = findById(id);</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;        logger.info(&quot;Delete curve point with id: {}&quot;, ratingToDelete.getId());</b>
+<b class="nc"><i class="no-highlight">78</i>&nbsp;        ratingRepository.delete(ratingToDelete);</b>
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-06 17:05</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RuleNameService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.service</a>
+</div>
+
+<h1>Coverage Summary for Class: RuleNameService (com.nnk.springboot.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RuleNameService</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RuleNameService$$EnhancerBySpringCGLIB$$2eeb087b</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.nnk.springboot.service;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.nnk.springboot.domain.Rating;
+<i class="no-highlight">4</i>&nbsp;import com.nnk.springboot.domain.RuleName;
+<i class="no-highlight">5</i>&nbsp;import com.nnk.springboot.repositories.RatingRepository;
+<i class="no-highlight">6</i>&nbsp;import com.nnk.springboot.repositories.RuleNameRepository;
+<i class="no-highlight">7</i>&nbsp;import org.apache.logging.log4j.LogManager;
+<i class="no-highlight">8</i>&nbsp;import org.apache.logging.log4j.Logger;
+<i class="no-highlight">9</i>&nbsp;import org.hibernate.ObjectNotFoundException;
+<i class="no-highlight">10</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i class="no-highlight">11</i>&nbsp;import org.springframework.stereotype.Service;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import javax.transaction.Transactional;
+<i class="no-highlight">14</i>&nbsp;import java.util.List;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;/**
+<i class="no-highlight">17</i>&nbsp; * RuleName Service class
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;@Service
+<i class="no-highlight">20</i>&nbsp;@Transactional
+<b class="fc"><i class="no-highlight">21</i>&nbsp;public class RuleNameService</b>
+<i class="no-highlight">22</i>&nbsp;{
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     *  Load RuleName Repository
+<i class="no-highlight">25</i>&nbsp;     */
+<i class="no-highlight">26</i>&nbsp;    @Autowired
+<i class="no-highlight">27</i>&nbsp;    RuleNameRepository ruleNameRepository;
+<i class="no-highlight">28</i>&nbsp;
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    private static final Logger logger = LogManager.getLogger(&quot;RuleNameServiceLog&quot;);</b>
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    /**
+<i class="no-highlight">32</i>&nbsp;     * Find list of all rule name :
+<i class="no-highlight">33</i>&nbsp;     * Call to find rule name in repository
+<i class="no-highlight">34</i>&nbsp;     *
+<i class="no-highlight">35</i>&nbsp;     * @return ruleNameList The ratings list
+<i class="no-highlight">36</i>&nbsp;     */
+<i class="no-highlight">37</i>&nbsp;    public List&lt;RuleName&gt; findAll()
+<i class="no-highlight">38</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        logger.info(&quot;Find all rule name list&quot;);</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;        return ruleNameRepository.findAll();</b>
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * Find rule name with id:
+<i class="no-highlight">45</i>&nbsp;     * Call to find a specific rule name in repository
+<i class="no-highlight">46</i>&nbsp;     *
+<i class="no-highlight">47</i>&nbsp;     * @param id Integer id
+<i class="no-highlight">48</i>&nbsp;     * @return RuleName The ruleNames id
+<i class="no-highlight">49</i>&nbsp;     */
+<i class="no-highlight">50</i>&nbsp;    public RuleName findById(Integer id)
+<i class="no-highlight">51</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        logger.info(&quot;Find rating by id: {}&quot;, id);</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        return ruleNameRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;RuleName&quot;, &quot;id&quot;));</b>
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    /**
+<i class="no-highlight">57</i>&nbsp;     * Save rule name:
+<i class="no-highlight">58</i>&nbsp;     * Call to save rule name in repository
+<i class="no-highlight">59</i>&nbsp;     *
+<i class="no-highlight">60</i>&nbsp;     * @param ruleName RuleName ruleName
+<i class="no-highlight">61</i>&nbsp;     * @return Rating The new rating save
+<i class="no-highlight">62</i>&nbsp;     */
+<i class="no-highlight">63</i>&nbsp;    public RuleName save(RuleName ruleName)
+<i class="no-highlight">64</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">65</i>&nbsp;        logger.info(&quot;Save rating with id: {}&quot;, ruleName.getId());</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;        return ruleNameRepository.save(ruleName);</b>
+<i class="no-highlight">67</i>&nbsp;    }
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    /**
+<i class="no-highlight">70</i>&nbsp;     * Delete rule name with id:
+<i class="no-highlight">71</i>&nbsp;     * Call to delete rule name in repository
+<i class="no-highlight">72</i>&nbsp;     *
+<i class="no-highlight">73</i>&nbsp;     * @param id Integer ruleName id
+<i class="no-highlight">74</i>&nbsp;     * @Return Void No return
+<i class="no-highlight">75</i>&nbsp;     */
+<i class="no-highlight">76</i>&nbsp;    public void delete(Integer id)
+<i class="no-highlight">77</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">78</i>&nbsp;        RuleName ruleNameToDelete = findById(id);</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        logger.info(&quot;Delete rule name with id: {}&quot;, ruleNameToDelete.getId());</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;        ruleNameRepository.delete(ruleNameToDelete);</b>
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-06 17:05</div>
+</div>
+</body>
+</html>

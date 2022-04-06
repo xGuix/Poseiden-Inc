@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Rating</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: Rating (com.nnk.springboot.domain)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Rating</td>
+<td class="coverageStat">
+  <span class="percent">
+    23,1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16,7%
+  </span>
+  <span class="absValue">
+    (3/18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Rating$HibernateProxy$WCQklAjB</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    23,1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16,7%
+  </span>
+  <span class="absValue">
+    (3/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.nnk.springboot.domain;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import javax.persistence.*;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;@Entity
+<i class="no-highlight">6</i>&nbsp;@Table(name = &quot;rating&quot;)
+<i class="no-highlight">7</i>&nbsp;public class Rating
+<i class="no-highlight">8</i>&nbsp;{
+<i class="no-highlight">9</i>&nbsp;    @Id
+<i class="no-highlight">10</i>&nbsp;    @GeneratedValue(strategy = GenerationType.AUTO)
+<i class="no-highlight">11</i>&nbsp;    @Column(name = &quot;id&quot;)
+<i class="no-highlight">12</i>&nbsp;    private Integer id;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;    @Column(name = &quot;moodys_rating&quot;)
+<i class="no-highlight">15</i>&nbsp;    private String moodysRating;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    @Column(name = &quot;sand_p_rating&quot;)
+<i class="no-highlight">18</i>&nbsp;    private String sandPRating;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    @Column(name = &quot;fitch_rating&quot;)
+<i class="no-highlight">21</i>&nbsp;    private String fitchRating;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    @Column(name = &quot;order_number&quot;)
+<i class="no-highlight">24</i>&nbsp;    private Integer orderNumber;
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    public Rating()
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    {}</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber)
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    {}</b>
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    public Rating(Integer id, String moodysRating, String sandPRating, String fitchRating, Integer orderNumber)
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    {</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;        this.id = id;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;        this.moodysRating = moodysRating;</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;        this.sandPRating = sandPRating;</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        this.fitchRating = fitchRating;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        this.orderNumber = orderNumber;</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    public Integer getId()
+<i class="no-highlight">42</i>&nbsp;    {
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        return id;</b>
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    public void setId(Integer id)
+<i class="no-highlight">47</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        this.id = id;</b>
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    public String getMoodysRating()
+<i class="no-highlight">52</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        return moodysRating;</b>
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    public void setMoodysRating(String moodysRating)
+<i class="no-highlight">57</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        this.moodysRating = moodysRating;</b>
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    public String getSandPRating()
+<i class="no-highlight">62</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        return sandPRating;</b>
+<i class="no-highlight">64</i>&nbsp;    }
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;    public void setSandPRating(String sandPRating)
+<i class="no-highlight">67</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">68</i>&nbsp;        this.sandPRating = sandPRating;</b>
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    public String getFitchRating()
+<i class="no-highlight">72</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">73</i>&nbsp;        return fitchRating;</b>
+<i class="no-highlight">74</i>&nbsp;    }
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    public void setFitchRating(String fitchRating)
+<i class="no-highlight">77</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">78</i>&nbsp;        this.fitchRating = fitchRating;</b>
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    public Integer getOrderNumber()
+<i class="no-highlight">82</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">83</i>&nbsp;        return orderNumber;</b>
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;    public void setOrderNumber(Integer orderNumber)
+<i class="no-highlight">87</i>&nbsp;    {
+<b class="nc"><i class="no-highlight">88</i>&nbsp;        this.orderNumber = orderNumber;</b>
+<i class="no-highlight">89</i>&nbsp;    }
+<i class="no-highlight">90</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-06 17:05</div>
+</div>
+</body>
+</html>

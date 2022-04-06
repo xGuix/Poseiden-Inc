@@ -5,13 +5,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Created by Khang Nguyen.
- * Email: khang.nguyen@banvien.com
- * Date: 09/03/2019
- * Time: 11:26 AM
+ * PasswordEncoder Test
  */
 @SpringBootTest
-public class PasswordEncodeTestIT {
+public class PasswordEncodeTestIT
+{
     @Test
     public void testPassword() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

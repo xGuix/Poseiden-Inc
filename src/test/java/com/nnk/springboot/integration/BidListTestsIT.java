@@ -2,7 +2,6 @@ package com.nnk.springboot.integration;
 
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,8 +40,9 @@ public class BidListTestsIT
 		// Save
 		bidListController.addBidForm(bid);
 
-		assertNotNull(bidListService.findAll());
-		assertEquals(bid.getBidQuantity(), 10d);
+		bid = bidListService.save(bid);
+
+		assertNotNull(bid);
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class BidListTestsIT
 		Integer id = bid.getBidListId();
 		bidListController.deleteBid(id);
 		BidList bidList = bidListService.findById(id);
-		assertFalse(bidList.getBid().isNaN());
+		assertNull(bidList);
 	}
 }
