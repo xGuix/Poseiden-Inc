@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
     <body>
         <!-- create navigation bar on top : Bootstrap 5.1 Header -->
         <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
+            <div class="container-fluid"  th:fragment="header">
                 <a class="navbar-brand" href="#" th:href="@{/}"> Ψրօʂεἶძεղ </a>
                 <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                         aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="navbar-nav">
-                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/list}"> USERS </a>
+                        <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}"> USERS </a>
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a>
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a>
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a>
@@ -32,8 +32,9 @@
             </div>
         </nav>
         <div class="row" style="font-size:0.8em"> Logged in user: <b th:inline="text"  class="user">[[${#httpServletRequest.remoteUser}]]</b></div>
-        <br><br>
-        <br><br>
+        <br><br><br>
+        <br><br><br>
+        <br><br><br>
         <div class="container-fluid ">
             <div class="row justify-content-md-center" >
                 <div class="col-lg-auto text-center">

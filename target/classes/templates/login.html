@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,13 +18,20 @@
 		    			aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 		     		<span class="navbar-toggler-icon"></span>
 		    	</button>
-		    	<div class="collapse navbar-collapse" id="navbar">
-		      		<div class="navbar-nav">
-		        		<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}"> logout</a>
-		      		</div>
-		    	</div>
+				<div class="collapse navbar-collapse" id="navbar">
+					<div class="navbar-nav">
+						<a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}"> USERS </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/trade/list}"> TRADE </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/ruleName/list}"> RULE </a>
+						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}"> logout </a>
+					</div>
+				</div>
 		  	</div>
 		</nav>
+		<br><br>
 		<br><br><br>
 		<br><br><br>
 		<div class="container-fluid ">
@@ -52,13 +59,13 @@
 						 <!-- User field -->
 					  	<div class="mb-3">
 					   		<label for="username" class="form-label"> Username </label>
-					    	<input type="text" class="form-control" id="username" name = "username" required
+					    	<input type="text" class="form-control text-center" id="username" name = "username" required
 								placeholder="Enter Username" autofocus="autofocus">
 					  	</div>
 					 	 <!-- Password field -->
 					 	<div class="mb-3">
 					   		<label for="password" class="form-label"> Password </label>
-					    	<input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+					    	<input type="password" class="form-control text-center" id="password" name="password" placeholder="Enter password">
 					 	</div>
 					  	<br>
 					 	 <!-- Login button -->
@@ -66,6 +73,12 @@
 					  		<button type="submit" name="login-submit" id="login-submit" class="btn btn-dark"> Login </button>
 					  	</div>
 					</form>
+					<br><br>
+					<!-- Github OAuth2 -->
+					<h3> LOGIN WITH GITHUB </h3>
+					<div class="d-grid gap-2 col-6 mx-auto">
+						<a th:href="@{/oauth2/authorization/github}" class="btn btn-dark"> Connect </a>
+					</div>
 			 	</div>
 			</div>
 		</div>

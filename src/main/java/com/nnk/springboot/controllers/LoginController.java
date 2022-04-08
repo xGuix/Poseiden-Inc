@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,6 +11,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController
 {
     private static final Logger logger = LogManager.getLogger("LoginController");
+
+    /**
+     *  Load OAuth2AuthorizedClientService
+     */
+    private final OAuth2AuthorizedClientService authorizedClientService;
+
+    /**
+     *  Custom constructor Login OAuth2
+     */
+    public LoginController(OAuth2AuthorizedClientService authorizedClientService)
+    {
+        this.authorizedClientService = authorizedClientService;
+    }
 
     /**
      * Render ModelAndView login
@@ -39,6 +53,6 @@ public class LoginController
         mav.addObject("errorMsg", errorMessage);
         mav.setViewName("403");
         logger.info("Error with access");
-        return "error";
+        return "/403";
     }
 }

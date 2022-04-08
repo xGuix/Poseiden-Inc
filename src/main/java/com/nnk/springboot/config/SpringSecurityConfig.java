@@ -1,6 +1,7 @@
 package com.nnk.springboot.config;
 
 import com.nnk.springboot.service.AccessUserDetailService;
+import com.nnk.springboot.service.OAuth2UserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 {
     @Autowired
     AccessUserDetailService userDetailService;
+
+    /**
+     * Load and instantiate OAuth2UserService
+     */
+    private OAuth2UserService oAuth2UserService  = new OAuth2UserService();
 
     /**
      *  Password Encoder
@@ -62,6 +68,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                 .invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .permitAll()
+                .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .userService(oAuth2UserService);
     }
 }
