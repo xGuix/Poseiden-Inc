@@ -2,7 +2,7 @@ package com.nnk.springboot.integration;
 
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.service.BidListService;
+import com.nnk.springboot.repositories.BidListRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,35 +18,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class BidListTestsIT
+class BidListTestIT
 {
 	@Autowired
 	private BidListController bidListController;
 
 	@Autowired
-	private BidListService bidListService;
+	private BidListRepository bidListRepository;
 
-	BidList bid;
+	BidList bid = new BidList();
 
 	@BeforeEach
 	public void setupTest()
 	{
-		bid = new BidList("Account Test", "Type Test", 10d);
+		bid.setAccount("Account Test");
+		bid.setType("Type Test");
+		bid.setBidQuantity(10d);
 	}
 
 	@Test
-	public void bidListSaveTest()
+	void bidListSaveTest()
 	{
 		// Save
-		bidListController.addBidForm(bid);
+		String addBidForm = bidListController.addBidForm(bid);
+		assertEquals("bidList/add", addBidForm);
 
-		bid = bidListService.save(bid);
+		bidListRepository.save(bid);
+		assertNotNull(bid.getBidListId());
 
-		assertNotNull(bid);
+		List<BidList> testList = bidListRepository.findAll();
+		assertNotNull(bidListRepository.findAll());
 	}
 
 	@Test
-	public void bidListUpdateTest()
+	void bidListUpdateTest()
 	{
 		// Update
 		bid.setBidQuantity(20d);
@@ -55,20 +60,22 @@ public class BidListTestsIT
 	}
 
 	@Test
-	public void bidListFindTest()
+	void bidListFindTest()
 	{
 		// Find
-		List<BidList> listResult = bidListService.findAll();
+		List<BidList> listResult;
+		listResult = bidListRepository.findAll();
 		assertTrue(listResult.size() > 0);
 	}
 
 	@Test
-	public void bidListDeleteTest()
+	void bidListDeleteTest()
 	{
 		// Delete
 		Integer id = bid.getBidListId();
-		bidListController.deleteBid(id);
-		BidList bidList = bidListService.findById(id);
-		assertNull(bidList);
+		bidListRepository.delete(bid);
+		List<BidList> bidList = bidListRepository.findAll();
+		assertFalse(bidList.get(bid.getBidListId()).equals(bid));
+		assertFalse(bidListRepository.existsById(id));
 	}
 }

@@ -4,11 +4,14 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.passay.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 /**
  * UserService class
@@ -94,5 +97,25 @@ public class UserService
             message = "Username already used!";
         }
         return message;
+    }
+
+    /**
+     * Verify valid password for User :
+     * Check if user password meet the requirements
+     *
+     * @return validate Boolean true if password is valid
+     */
+    public Boolean validatePassword(String password)
+    {
+        logger.info("Checking if password is valid");
+        PasswordValidator validator = new PasswordValidator(Arrays.asList(
+                new LengthRule(8, 16),
+                new CharacterRule(EnglishCharacterData.UpperCase, 1),
+                new CharacterRule(EnglishCharacterData.Digit, 1),
+                new CharacterRule(EnglishCharacterData.Special, 1)));
+        RuleResult result = validator.validate(new PasswordData(password));
+
+        logger.debug("Password result: {}", result.isValid());
+        return result.isValid();
     }
 }

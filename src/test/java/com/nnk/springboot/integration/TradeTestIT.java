@@ -1,11 +1,15 @@
 package com.nnk.springboot.integration;
 
+import com.nnk.springboot.config.SpringSecurityConfig;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +17,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class TradeTestsIT
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { SpringSecurityConfig.class })
+public class TradeTestIT
 {
 	@Autowired
 	private TradeRepository tradeRepository;

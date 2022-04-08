@@ -5,6 +5,7 @@ import com.nnk.springboot.repositories.BidListRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.ObjectNotFoundException;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class BidListService
      * @param bidList BidList bidList
      * @return BidList The new bid save
      */
-    public BidList save(BidList bidList)
+    public BidList save(@NotNull BidList bidList)
     {
         logger.info("Save BidList with account name: {}", bidList.getAccount());
         return bidListRepository.save(bidList);

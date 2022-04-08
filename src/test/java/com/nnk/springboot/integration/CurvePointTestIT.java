@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class CurvePointTestsIT
+public class CurvePointTestIT
 {
 	@Autowired
 	private CurvePointRepository curvePointRepository;

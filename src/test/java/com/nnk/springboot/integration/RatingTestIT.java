@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class RatingTestsIT
+public class RatingTestIT
 {
 	@Autowired
 	private RatingRepository ratingRepository;
