@@ -1,6 +1,7 @@
-com/nnk/springboot/RuleTests.class
-com/nnk/springboot/BidTests.class
-com/nnk/springboot/PasswordEncodeTest.class
-com/nnk/springboot/CurvePointTests.class
-com/nnk/springboot/TradeTests.class
-com/nnk/springboot/RatingTests.class
+com/nnk/springboot/integration/CurvePointTestIT.class
+com/nnk/springboot/PoseidenApplicationTest.class
+com/nnk/springboot/integration/TradeTestIT.class
+com/nnk/springboot/integration/RuleNameTestIT.class
+com/nnk/springboot/integration/PasswordEncodeTestIT.class
+com/nnk/springboot/integration/BidListTestIT.class
+com/nnk/springboot/integration/RatingTestIT.class

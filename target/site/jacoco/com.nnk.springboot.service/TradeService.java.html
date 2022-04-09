@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.service</a> &gt; <span class="el_source">TradeService.java</span></div><h1>TradeService.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.service;
+
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.repositories.TradeRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+/**
+ * Trade Service class
+ */
+@Service
+@Transactional
+<span class="fc" id="L20">public class TradeService</span>
+{
+    /**
+     *  Load Trade Repository
+     */
+    @Autowired
+    TradeRepository tradeRepository;
+
+<span class="fc" id="L28">    private static final Logger logger = LogManager.getLogger(&quot;TradeServiceLog&quot;);</span>
+
+    /**
+     * Find list of all trade :
+     * Call to find trade in repository
+     *
+     * @return tradeList The trade list
+     */
+    public List&lt;Trade&gt; findAll()
+    {
+<span class="nc" id="L38">        logger.info(&quot;Find all trade list&quot;);</span>
+<span class="nc" id="L39">        return tradeRepository.findAll();</span>
+    }
+
+    /**
+     * Find trade with id:
+     * Call to find a specific trade in repository
+     *
+     * @param id Integer id
+     * @return Trade The trade id
+     */
+    public Trade findById(Integer id)
+    {
+<span class="nc" id="L51">        logger.info(&quot;Find trade by id: {}&quot;, id);</span>
+<span class="nc" id="L52">        return tradeRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;trade&quot;, &quot;id&quot;));</span>
+    }
+
+    /**
+     * Save trade:
+     * Call to save trade in repository
+     *
+     * @param trade Trade new trade
+     * @return Trade The new trade save
+     */
+    public Trade save(Trade trade)
+    {
+<span class="nc" id="L64">        logger.info(&quot;Save rating with id: {}&quot;, trade.getTradeId());</span>
+<span class="nc" id="L65">        return tradeRepository.save(trade);</span>
+    }
+
+    /**
+     * Delete trade with id:
+     * Call to delete trade in repository
+     *
+     * @param id Integer trade id
+     * @Return Void No return
+     */
+    public void delete(Integer id)
+    {
+<span class="nc" id="L77">        Trade tradeToDelete = findById(id);</span>
+<span class="nc" id="L78">        logger.info(&quot;Delete curve point with id: {}&quot;, tradeToDelete.getTradeId());</span>
+<span class="nc" id="L79">        tradeRepository.delete(tradeToDelete);</span>
+<span class="nc" id="L80">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

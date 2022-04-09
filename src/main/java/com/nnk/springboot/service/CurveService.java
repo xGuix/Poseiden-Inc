@@ -69,7 +69,7 @@ public class CurveService
      * Call to delete curve point in repository
      *
      * @param id Integer Curve id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {

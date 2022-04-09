@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">SignupController.java</span></div><h1>SignupController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+
+/**
+ *  Signup Thymeleaf controller
+ */
+@Controller
+public class SignupController
+{
+<span class="fc" id="L24">    private static final Logger logger = LogManager.getLogger(&quot;SignupControllerLog&quot;);</span>
+
+    private final UserService userService;
+
+    /**
+     *  Constructor friend controller
+     *
+     *  @param userService User service
+     */
+    public SignupController(UserService userService)
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">        this.userService = userService;</span>
+<span class="fc" id="L36">    }</span>
+
+    /**
+     *  Get signup page:
+     * 	- user model
+     *
+     *  @param model Model
+     *
+     *  @return signup Signup page url
+     */
+    @GetMapping(value = &quot;/signup&quot;)
+    public String signUpView(@NotNull Model model)
+    {
+<span class="nc" id="L49">        model.addAttribute(&quot;user&quot;, new User());</span>
+<span class="nc" id="L50">        logger.info(&quot;Get signup page&quot;);</span>
+<span class="nc" id="L51">        return &quot;signup&quot;;</span>
+    }
+
+    /**
+     *  Post signup form:
+     * 	- create a new user
+     *
+     *  @param user SignupDTO
+     *  @param result BindingResult
+     *  @param model Model
+     *  @param redirAttrs RedirectAttributes
+     *
+     *  @return signup Signup page url
+     */
+    @PostMapping(value = &quot;/signup&quot;)
+    public String signUp(@Valid User user, BindingResult result, Model model, RedirectAttributes redirAttrs)
+    {
+<span class="nc" id="L68">        String err = userService.validateUser(user);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (!&quot;Not Found&quot;.equals(err))</span>
+        {
+<span class="nc" id="L71">            ObjectError error = new ObjectError(&quot;globalError&quot;, err);</span>
+<span class="nc" id="L72">            result.addError(error);</span>
+        }
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (result.hasErrors())</span>
+        {
+<span class="nc" id="L76">            redirAttrs.addFlashAttribute(&quot;error&quot;, err);</span>
+<span class="nc" id="L77">            logger.info(&quot;Data error, no signup&quot;);</span>
+<span class="nc" id="L78">            return &quot;redirect:/signup&quot;;</span>
+        }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if(userService.validatePassword(user.getPassword()))</span>
+        {
+<span class="nc" id="L82">            logger.info(&quot;Valid password&quot;);</span>
+<span class="nc" id="L83">            userService.addUser(user);</span>
+<span class="nc" id="L84">            redirAttrs.addFlashAttribute(&quot;success&quot;, &quot;Success!&quot;);</span>
+<span class="nc" id="L85">            logger.info(&quot;New user has been saved: {}&quot;, user);</span>
+<span class="nc" id="L86">            return &quot;redirect:/login&quot;;</span>
+        }
+<span class="nc" id="L88">        redirAttrs.addFlashAttribute(&quot;error&quot;,&quot;Invalid password:&quot; +</span>
+                &quot; it should contain between 8 min and 16 max characters&quot; +
+                &quot; with 1 uppercase, 1 digits and 1 special character&quot;);
+<span class="nc" id="L91">        logger.info(&quot;Invalid password, user not save: {}&quot;, user);</span>
+<span class="nc" id="L92">        return &quot;redirect:/signup&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
