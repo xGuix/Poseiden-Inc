@@ -1,8 +1,6 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,14 +8,12 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * RuleName Service class
  */
 @Service
-@Transactional
 public class RuleNameService
 {
     /**
@@ -71,7 +67,7 @@ public class RuleNameService
      * Call to delete rule name in repository
      *
      * @param id Integer ruleName id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {

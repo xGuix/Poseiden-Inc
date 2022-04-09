@@ -19,6 +19,8 @@ public class LoginController
 
     /**
      *  Custom constructor Login OAuth2
+     *
+     * @param authorizedClientService OAuth2AuthorizedClientService
      */
     public LoginController(OAuth2AuthorizedClientService authorizedClientService)
     {

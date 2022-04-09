@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.service.RatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class RatingController
      * @return rating/list Rating list page
      */
     @RequestMapping("/rating/list")
-    public String home(Model model)
+    public String home(@NotNull Model model)
     {
         model.addAttribute("ratingList", ratingService.findAll());
         logger.info("Get rating list");
@@ -65,10 +66,10 @@ public class RatingController
      * @param rating Rating rating
      * @param result BindingResult result
      * @param model Model rating
-     * @return rating/validate Validate rating page
+     * @return rating/list All rating list page
      */
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model)
+    public String validate(@Valid Rating rating, @NotNull BindingResult result, Model model)
     {
         logger.info("Get rating validation");
         if(!result.hasErrors())
@@ -92,7 +93,7 @@ public class RatingController
      * @return rating/update Update rating page
      */
     @GetMapping("/rating/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model)
+    public String showUpdateForm(@PathVariable("id") Integer id, @NotNull Model model)
     {
         Rating rating = ratingService.findById(id);
         model.addAttribute("rating", rating);
@@ -107,11 +108,11 @@ public class RatingController
      * @param id Integer id
      * @param rating Rating update
      * @param result BindingResult result
-     * @param model Model curvePoint
-     * @return redirect:/rating/list Update rating page
+     * @param model Model rating
+     * @return redirect:/rating/list Update rating list page
      */
     @PostMapping("/rating/update/{id}")
-    public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult result, Model model)
+    public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, @NotNull BindingResult result, Model model)
     {
         logger.info("Post update curve point with id");
         if(!result.hasErrors())
@@ -132,7 +133,7 @@ public class RatingController
      *
      * @param id Integer id
      * @param model Model rating
-     * @return redirect:/rating/list Update rating page
+     * @return redirect:/rating/list Update rating list page
      */
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model)

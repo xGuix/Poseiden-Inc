@@ -1,6 +1,5 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 import org.apache.logging.log4j.LogManager;
@@ -9,14 +8,12 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Trade Service class
  */
 @Service
-@Transactional
 public class TradeService
 {
     /**
@@ -70,7 +67,7 @@ public class TradeService
      * Call to delete trade in repository
      *
      * @param id Integer trade id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {

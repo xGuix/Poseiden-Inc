@@ -8,14 +8,12 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Rating Service class
  */
 @Service
-@Transactional
 public class RatingService
 {
     /**
@@ -69,7 +67,7 @@ public class RatingService
      * Call to delete rating in repository
      *
      * @param id Integer rating id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {

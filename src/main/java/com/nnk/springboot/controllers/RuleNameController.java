@@ -65,7 +65,7 @@ public class RuleNameController
      * @param ruleName RuleName ruleName
      * @param result BindingResult result
      * @param model Model ruleName
-     * @return ruleName/validate Validate ruleName page
+     * @return ruleName/list All ruleName list page
      */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model)
@@ -133,7 +133,7 @@ public class RuleNameController
      *
      * @param id Integer id
      * @param model Model ruleName
-     * @return redirect:/ruleName/list Update ruleName page
+     * @return redirect:/ruleName/list Update ruleName list page
      */
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model)

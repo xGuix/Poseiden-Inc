@@ -8,14 +8,12 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Curve Service class
  */
 @Service
-@Transactional
 public class CurveService
 {
     /**

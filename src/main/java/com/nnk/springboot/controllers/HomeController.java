@@ -24,6 +24,12 @@ public class HomeController
 		return "home";
 	}
 
+	/**
+	 * Home admin page view
+	 *
+	 * @param model Model Interface
+	 * @return /bidList/list BidList page user list
+	 */
 	@RequestMapping("/admin/home")
 	public String adminHome(Model model)
 	{

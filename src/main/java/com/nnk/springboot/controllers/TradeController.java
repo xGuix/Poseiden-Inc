@@ -60,8 +60,8 @@ public class TradeController
      *
      * @param trade Trade new trade
      * @param result BindingResult result
-     * @param model Model bidList
-     * @return trade/validate Trade validate page
+     * @param model Model trade
+     * @return trade/list All trade list page
      */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model)
@@ -104,7 +104,7 @@ public class TradeController
      * @param trade Trade update
      * @param result BindingResult result
      * @param model Model trade
-     * @return redirect:/rating/list Update rating page
+     * @return redirect:/trade/list Update trade list page
      */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult result, Model model)

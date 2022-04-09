@@ -57,8 +57,8 @@ public class UserService
      * Find users with username :
      * Call to find user in repository
      *
-     * @Param  username String Username
-     * @Return  User Username
+     * @param  username String Username
+     * @return user User Username
      */
     public User findByUsername(String username)
     {
@@ -70,8 +70,8 @@ public class UserService
      * Add new user :
      * Save user, encrypt password and give USER role
      *
-     * @Param  User Username
-     * @Return  User User save
+     * @param  user Username
+     * @return User User save
      */
     public User addUser(User user)
     {
@@ -86,6 +86,7 @@ public class UserService
      * Verify existing User :
      * Check if user email already exists in database
      *
+     * @param user User
      * @return Message Information string
      */
     public String validateUser(User user)
@@ -103,6 +104,7 @@ public class UserService
      * Verify valid password for User :
      * Check if user password meet the requirements
      *
+     * @param password String password
      * @return validate Boolean true if password is valid
      */
     public Boolean validatePassword(String password)

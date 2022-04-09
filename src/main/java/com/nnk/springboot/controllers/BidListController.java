@@ -49,7 +49,7 @@ public class BidListController
      * Form for new bid
      *
      * @param bid BidList bid
-     * @return bidList/add Add new bid page
+     * @return bidList/add New bid add page
      */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid)
@@ -65,7 +65,7 @@ public class BidListController
      * @param bid BidList bid
      * @param result BindingResult result
      * @param model Model bidList
-     * @return bidList/validate Validate bid page
+     * @return bidList/list All bidList page
      */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model)
@@ -132,7 +132,7 @@ public class BidListController
      * Call to delete bids
      *
      * @param id Integer id
-     * @return redirect:/bidList/list Update bidList page
+     * @return redirect:/bidList/list Update bidList list page
      */
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id)

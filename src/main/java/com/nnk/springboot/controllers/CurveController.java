@@ -64,8 +64,8 @@ public class CurveController
      *
      * @param curvePoint CurvePoint curvePoint
      * @param result BindingResult result
-     * @param model Model bidList
-     * @return curvePoint/validate Validate curvePoint page
+     * @param model Model curvePoint
+     * @return curvePoint/list All curvePoint list page
      */
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model)
@@ -133,7 +133,7 @@ public class CurveController
      *
      * @param id Integer id
      * @param model Model curvePoint
-     * @return redirect:/curvePoint/list Update curvePoint page
+     * @return redirect:/curvePoint/list Update curvePoint list page
      */
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model)
