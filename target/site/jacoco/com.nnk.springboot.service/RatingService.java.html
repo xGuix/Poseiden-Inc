@@ -8,15 +8,13 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Rating Service class
  */
 @Service
-@Transactional
-<span class="fc" id="L19">public class RatingService</span>
+<span class="fc" id="L17">public class RatingService</span>
 {
     /**
      *  Load Rating Repository
@@ -24,7 +22,7 @@ import java.util.List;
     @Autowired
     RatingRepository ratingRepository;
 
-<span class="fc" id="L27">    private static final Logger logger = LogManager.getLogger(&quot;RatingServiceLog&quot;);</span>
+<span class="fc" id="L25">    private static final Logger logger = LogManager.getLogger(&quot;RatingServiceLog&quot;);</span>
 
     /**
      * Find list of all ratings :
@@ -34,8 +32,8 @@ import java.util.List;
      */
     public List&lt;Rating&gt; findAll()
     {
-<span class="nc" id="L37">        logger.info(&quot;Find all rating list&quot;);</span>
-<span class="nc" id="L38">        return ratingRepository.findAll();</span>
+<span class="nc" id="L35">        logger.info(&quot;Find all rating list&quot;);</span>
+<span class="nc" id="L36">        return ratingRepository.findAll();</span>
     }
 
     /**
@@ -47,8 +45,8 @@ import java.util.List;
      */
     public Rating findById(Integer id)
     {
-<span class="nc" id="L50">        logger.info(&quot;Find rating by id: {}&quot;, id);</span>
-<span class="nc" id="L51">        return ratingRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;Rating&quot;, &quot;id&quot;));</span>
+<span class="nc" id="L48">        logger.info(&quot;Find rating by id: {}&quot;, id);</span>
+<span class="nc" id="L49">        return ratingRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;Rating&quot;, &quot;id&quot;));</span>
     }
 
     /**
@@ -60,8 +58,8 @@ import java.util.List;
      */
     public Rating save(Rating rating)
     {
-<span class="nc" id="L63">        logger.info(&quot;Save rating with id: {}&quot;, rating.getId());</span>
-<span class="nc" id="L64">        return ratingRepository.save(rating);</span>
+<span class="nc" id="L61">        logger.info(&quot;Save rating with id: {}&quot;, rating.getId());</span>
+<span class="nc" id="L62">        return ratingRepository.save(rating);</span>
     }
 
     /**
@@ -69,13 +67,13 @@ import java.util.List;
      * Call to delete rating in repository
      *
      * @param id Integer rating id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {
-<span class="nc" id="L76">        Rating ratingToDelete = findById(id);</span>
-<span class="nc" id="L77">        logger.info(&quot;Delete curve point with id: {}&quot;, ratingToDelete.getId());</span>
-<span class="nc" id="L78">        ratingRepository.delete(ratingToDelete);</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L74">        Rating ratingToDelete = findById(id);</span>
+<span class="nc" id="L75">        logger.info(&quot;Delete curve point with id: {}&quot;, ratingToDelete.getId());</span>
+<span class="nc" id="L76">        ratingRepository.delete(ratingToDelete);</span>
+<span class="nc" id="L77">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

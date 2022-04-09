@@ -36,8 +36,8 @@ public class AccessUserDetailService implements UserDetailsService
 
     /**
      * Method who load a UserDetails user from a username
-     * @Param  username (String)
-     * @Return  user (UserDetails)
+     * @param username (String)
+     * @return user (UserDetails)
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException

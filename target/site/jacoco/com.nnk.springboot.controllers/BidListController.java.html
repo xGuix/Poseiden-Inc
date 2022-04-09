@@ -49,7 +49,7 @@ import javax.validation.Valid;
      * Form for new bid
      *
      * @param bid BidList bid
-     * @return bidList/add Add new bid page
+     * @return bidList/add New bid add page
      */
     @GetMapping(&quot;/bidList/add&quot;)
     public String addBidForm(BidList bid)
@@ -65,7 +65,7 @@ import javax.validation.Valid;
      * @param bid BidList bid
      * @param result BindingResult result
      * @param model Model bidList
-     * @return bidList/validate Validate bid page
+     * @return bidList/list All bidList page
      */
     @PostMapping(&quot;/bidList/validate&quot;)
     public String validate(@Valid BidList bid, BindingResult result, Model model)
@@ -132,7 +132,7 @@ import javax.validation.Valid;
      * Call to delete bids
      *
      * @param id Integer id
-     * @return redirect:/bidList/list Update bidList page
+     * @return redirect:/bidList/list Update bidList list page
      */
     @GetMapping(&quot;/bidList/delete/{id}&quot;)
     public String deleteBid(@PathVariable(&quot;id&quot;) Integer id)

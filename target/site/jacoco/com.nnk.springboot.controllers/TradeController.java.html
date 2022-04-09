@@ -60,8 +60,8 @@ import javax.validation.Valid;
      *
      * @param trade Trade new trade
      * @param result BindingResult result
-     * @param model Model bidList
-     * @return trade/validate Trade validate page
+     * @param model Model trade
+     * @return trade/list All trade list page
      */
     @PostMapping(&quot;/trade/validate&quot;)
     public String validate(@Valid Trade trade, BindingResult result, Model model)
@@ -104,7 +104,7 @@ import javax.validation.Valid;
      * @param trade Trade update
      * @param result BindingResult result
      * @param model Model trade
-     * @return redirect:/rating/list Update rating page
+     * @return redirect:/trade/list Update trade list page
      */
     @PostMapping(&quot;/trade/update/{id}&quot;)
     public String updateTrade(@PathVariable(&quot;id&quot;) Integer id, @Valid Trade trade, BindingResult result, Model model)

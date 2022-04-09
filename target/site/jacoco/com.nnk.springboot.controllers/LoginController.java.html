@@ -19,11 +19,13 @@ public class LoginController
 
     /**
      *  Custom constructor Login OAuth2
+     *
+     * @param authorizedClientService OAuth2AuthorizedClientService
      */
     public LoginController(OAuth2AuthorizedClientService authorizedClientService)
-<span class="fc" id="L24">    {</span>
-<span class="fc" id="L25">        this.authorizedClientService = authorizedClientService;</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L26">    {</span>
+<span class="fc" id="L27">        this.authorizedClientService = authorizedClientService;</span>
+<span class="fc" id="L28">    }</span>
 
     /**
      * Render ModelAndView login
@@ -33,10 +35,10 @@ public class LoginController
     @GetMapping(value =&quot;/login&quot;)
     public String login()
     {
-<span class="nc" id="L36">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L37">        mav.setViewName(&quot;login&quot;);</span>
-<span class="nc" id="L38">        logger.info(&quot;Get login page&quot;);</span>
-<span class="nc" id="L39">        return &quot;login&quot;;</span>
+<span class="nc" id="L38">        ModelAndView mav = new ModelAndView();</span>
+<span class="nc" id="L39">        mav.setViewName(&quot;login&quot;);</span>
+<span class="nc" id="L40">        logger.info(&quot;Get login page&quot;);</span>
+<span class="nc" id="L41">        return &quot;login&quot;;</span>
     }
 
     /**
@@ -48,12 +50,12 @@ public class LoginController
     @GetMapping(value =&quot;error&quot;)
     public String error()
     {
-<span class="nc" id="L51">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L52">        String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
-<span class="nc" id="L53">        mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L54">        mav.setViewName(&quot;403&quot;);</span>
-<span class="nc" id="L55">        logger.info(&quot;Error with access&quot;);</span>
-<span class="nc" id="L56">        return &quot;/403&quot;;</span>
+<span class="nc" id="L53">        ModelAndView mav = new ModelAndView();</span>
+<span class="nc" id="L54">        String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
+<span class="nc" id="L55">        mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
+<span class="nc" id="L56">        mav.setViewName(&quot;403&quot;);</span>
+<span class="nc" id="L57">        logger.info(&quot;Error with access&quot;);</span>
+<span class="nc" id="L58">        return &quot;/403&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.service.RatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,9 @@ import javax.validation.Valid;
  * Rating Controller class
  */
 @Controller
-<span class="fc" id="L22">public class RatingController</span>
+<span class="fc" id="L23">public class RatingController</span>
 {
-<span class="fc" id="L24">    private static final Logger logger = LogManager.getLogger(&quot;RatingControllerLog&quot;);</span>
+<span class="fc" id="L25">    private static final Logger logger = LogManager.getLogger(&quot;RatingControllerLog&quot;);</span>
 
     /**
      * Load service Rating
@@ -37,11 +38,11 @@ import javax.validation.Valid;
      * @return rating/list Rating list page
      */
     @RequestMapping(&quot;/rating/list&quot;)
-    public String home(Model model)
+    public String home(@NotNull Model model)
     {
-<span class="nc" id="L42">        model.addAttribute(&quot;ratingList&quot;, ratingService.findAll());</span>
-<span class="nc" id="L43">        logger.info(&quot;Get rating list&quot;);</span>
-<span class="nc" id="L44">        return &quot;rating/list&quot;;</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;ratingList&quot;, ratingService.findAll());</span>
+<span class="nc" id="L44">        logger.info(&quot;Get rating list&quot;);</span>
+<span class="nc" id="L45">        return &quot;rating/list&quot;;</span>
     }
 
     /**
@@ -54,8 +55,8 @@ import javax.validation.Valid;
     @GetMapping(&quot;/rating/add&quot;)
     public String addRatingForm(Rating rating)
     {
-<span class="nc" id="L57">        logger.info(&quot;Get add in rating list&quot;);</span>
-<span class="nc" id="L58">        return &quot;rating/add&quot;;</span>
+<span class="nc" id="L58">        logger.info(&quot;Get add in rating list&quot;);</span>
+<span class="nc" id="L59">        return &quot;rating/add&quot;;</span>
     }
 
     /**
@@ -65,21 +66,21 @@ import javax.validation.Valid;
      * @param rating Rating rating
      * @param result BindingResult result
      * @param model Model rating
-     * @return rating/validate Validate rating page
+     * @return rating/list All rating list page
      */
     @PostMapping(&quot;/rating/validate&quot;)
-    public String validate(@Valid Rating rating, BindingResult result, Model model)
+    public String validate(@Valid Rating rating, @NotNull BindingResult result, Model model)
     {
-<span class="nc" id="L73">        logger.info(&quot;Get rating validation&quot;);</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(!result.hasErrors())</span>
+<span class="nc" id="L74">        logger.info(&quot;Get rating validation&quot;);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if(!result.hasErrors())</span>
         {
-<span class="nc" id="L76">            ratingService.save(rating);</span>
-<span class="nc" id="L77">            logger.info(&quot;Rating with id {} has been saved !&quot;, rating.getId());</span>
-<span class="nc" id="L78">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L77">            ratingService.save(rating);</span>
+<span class="nc" id="L78">            logger.info(&quot;Rating with id {} has been saved !&quot;, rating.getId());</span>
+<span class="nc" id="L79">            return &quot;redirect:/rating/list&quot;;</span>
         }
         else {
-<span class="nc" id="L81">            logger.error(&quot;Error id: Rating not validate. Please check and retry!&quot;);</span>
-<span class="nc" id="L82">            return &quot;rating/add&quot;;</span>
+<span class="nc" id="L82">            logger.error(&quot;Error id: Rating not validate. Please check and retry!&quot;);</span>
+<span class="nc" id="L83">            return &quot;rating/add&quot;;</span>
         }
     }
 
@@ -92,12 +93,12 @@ import javax.validation.Valid;
      * @return rating/update Update rating page
      */
     @GetMapping(&quot;/rating/update/{id}&quot;)
-    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, @NotNull Model model)
     {
-<span class="nc" id="L97">        Rating rating = ratingService.findById(id);</span>
-<span class="nc" id="L98">        model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="nc" id="L99">        logger.info(&quot;Get update rating with id&quot;);</span>
-<span class="nc" id="L100">        return &quot;rating/update&quot;;</span>
+<span class="nc" id="L98">        Rating rating = ratingService.findById(id);</span>
+<span class="nc" id="L99">        model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="nc" id="L100">        logger.info(&quot;Get update rating with id&quot;);</span>
+<span class="nc" id="L101">        return &quot;rating/update&quot;;</span>
     }
 
     /**
@@ -107,22 +108,22 @@ import javax.validation.Valid;
      * @param id Integer id
      * @param rating Rating update
      * @param result BindingResult result
-     * @param model Model curvePoint
-     * @return redirect:/rating/list Update rating page
+     * @param model Model rating
+     * @return redirect:/rating/list Update rating list page
      */
     @PostMapping(&quot;/rating/update/{id}&quot;)
-    public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating, BindingResult result, Model model)
+    public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating, @NotNull BindingResult result, Model model)
     {
-<span class="nc" id="L116">        logger.info(&quot;Post update curve point with id&quot;);</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">        if(!result.hasErrors())</span>
+<span class="nc" id="L117">        logger.info(&quot;Post update curve point with id&quot;);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if(!result.hasErrors())</span>
         {
-<span class="nc" id="L119">            ratingService.save(rating);</span>
-<span class="nc" id="L120">            logger.info(&quot;Curve point with account {} has been updated !&quot;, rating.getId());</span>
-<span class="nc" id="L121">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L120">            ratingService.save(rating);</span>
+<span class="nc" id="L121">            logger.info(&quot;Curve point with account {} has been updated !&quot;, rating.getId());</span>
+<span class="nc" id="L122">            return &quot;redirect:/rating/list&quot;;</span>
         }
         else {
-<span class="nc" id="L124">            logger.error(&quot;Error id: update not validate. Please check and retry!&quot;);</span>
-<span class="nc" id="L125">            return &quot;/rating/update/{id}&quot;;</span>
+<span class="nc" id="L125">            logger.error(&quot;Error id: update not validate. Please check and retry!&quot;);</span>
+<span class="nc" id="L126">            return &quot;/rating/update/{id}&quot;;</span>
         }
     }
 
@@ -132,15 +133,15 @@ import javax.validation.Valid;
      *
      * @param id Integer id
      * @param model Model rating
-     * @return redirect:/rating/list Update rating page
+     * @return redirect:/rating/list Update rating list page
      */
     @GetMapping(&quot;/rating/delete/{id}&quot;)
     public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model)
     {
-<span class="nc" id="L140">        logger.info(&quot;Delete rating with id&quot;);</span>
-<span class="nc" id="L141">        ratingService.delete(id);</span>
-<span class="nc" id="L142">        logger.info(&quot;Rating with id: {} deleted !&quot;, id);</span>
-<span class="nc" id="L143">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L141">        logger.info(&quot;Delete rating with id&quot;);</span>
+<span class="nc" id="L142">        ratingService.delete(id);</span>
+<span class="nc" id="L143">        logger.info(&quot;Rating with id: {} deleted !&quot;, id);</span>
+<span class="nc" id="L144">        return &quot;redirect:/rating/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -2,6 +2,7 @@
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
  *  User Thymeleaf controller
  */
 @Controller
-<span class="fc" id="L22">public class UserController</span>
+<span class="fc" id="L23">public class UserController</span>
 {
     /**
      *  Load User Repository
@@ -30,66 +31,111 @@ import javax.validation.Valid;
     /**
      *  ADMIN Role allowed
      *  CRUD user list not allow for users
+     *
+     * @param model Model
+     * @return user/list User list page
      */
     @RolesAllowed(&quot;ADMIN&quot;)
     @RequestMapping(&quot;/user/list&quot;)
-    public String home(Model model)
+    public String home(@NotNull Model model)
     {
-<span class="nc" id="L38">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L39">        return &quot;user/list&quot;;</span>
+<span class="nc" id="L42">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
+<span class="nc" id="L43">        return &quot;user/list&quot;;</span>
     }
-    
+
+    /**
+     * Get add user page:
+     * Form for new user
+     *
+     * @param user User add user
+     * @return user/add New user page
+     */
     @GetMapping(&quot;/user/add&quot;)
-    public String add(User bid)
+    public String add(User user)
     {
-<span class="nc" id="L45">        return &quot;user/add&quot;;</span>
+<span class="nc" id="L56">        return &quot;user/add&quot;;</span>
     }
 
+    /**
+     * Post to validate user:
+     * Form for new user
+     *
+     * @param user User new user
+     * @param result BindingResult result
+     * @param model Model rating
+     * @return user/list All user list page
+     */
     @PostMapping(&quot;/user/validate&quot;)
-    public String validate(@Valid User user, BindingResult result, Model model)
+    public String validate(@Valid User user, @NotNull BindingResult result, Model model)
     {
-<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (!result.hasErrors())</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (!result.hasErrors())</span>
         {
-<span class="nc" id="L53">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L54">            user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L55">            userRepository.save(user);</span>
-<span class="nc" id="L56">            model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L57">            return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L73">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L74">            user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L75">            userRepository.save(user);</span>
+<span class="nc" id="L76">            model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
+<span class="nc" id="L77">            return &quot;redirect:/user/list&quot;;</span>
         }
-<span class="nc" id="L59">        return &quot;user/add&quot;;</span>
+<span class="nc" id="L79">        return &quot;user/add&quot;;</span>
     }
 
+    /**
+     * Get user update:
+     * Form to update user
+     *
+     * @param id Integer id
+     * @param model Model user
+     * @return user/update Update user page
+     */
     @GetMapping(&quot;/user/update/{id}&quot;)
-    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, @NotNull Model model)
     {
-<span class="nc" id="L65">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L66">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L67">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L68">        return &quot;user/update&quot;;</span>
+<span class="nc" id="L93">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L94">        user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L95">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L96">        return &quot;user/update&quot;;</span>
     }
 
+    /**
+     * Post user update:
+     * Form to post update user
+     *
+     * @param id Integer id
+     * @param user User update
+     * @param result BindingResult result
+     * @param model Model user
+     * @return redirect:/user/list Update user list page
+     */
     @PostMapping(&quot;/user/update/{id}&quot;)
-    public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user, BindingResult result, Model model)
+    public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user, @NotNull BindingResult result, Model model)
     {
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (result.hasErrors())</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (result.hasErrors())</span>
         {
-<span class="nc" id="L76">            return &quot;user/update&quot;;</span>
+<span class="nc" id="L114">            return &quot;user/update&quot;;</span>
         }
-<span class="nc" id="L78">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L79">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L80">        user.setId(id);</span>
-<span class="nc" id="L81">        userRepository.save(user);</span>
-<span class="nc" id="L82">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L83">        return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L116">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L117">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L118">        user.setId(id);</span>
+<span class="nc" id="L119">        userRepository.save(user);</span>
+<span class="nc" id="L120">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
+<span class="nc" id="L121">        return &quot;redirect:/user/list&quot;;</span>
     }
 
+    /**
+     * Get user to delete:
+     * Call to delete user
+     *
+     * @param id Integer id
+     * @param model Model user
+     * @return redirect:/user/list Update user list page
+     */
     @GetMapping(&quot;/user/delete/{id}&quot;)
-    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model)
+    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, @NotNull Model model)
     {
-<span class="nc" id="L89">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L90">        userRepository.delete(user);</span>
-<span class="nc" id="L91">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L92">        return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L135">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L136">        userRepository.delete(user);</span>
+<span class="nc" id="L137">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
+<span class="nc" id="L138">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

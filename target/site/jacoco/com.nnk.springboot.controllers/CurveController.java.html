@@ -64,8 +64,8 @@ import javax.validation.Valid;
      *
      * @param curvePoint CurvePoint curvePoint
      * @param result BindingResult result
-     * @param model Model bidList
-     * @return curvePoint/validate Validate curvePoint page
+     * @param model Model curvePoint
+     * @return curvePoint/list All curvePoint list page
      */
     @PostMapping(&quot;/curvePoint/validate&quot;)
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model)
@@ -133,7 +133,7 @@ import javax.validation.Valid;
      *
      * @param id Integer id
      * @param model Model curvePoint
-     * @return redirect:/curvePoint/list Update curvePoint page
+     * @return redirect:/curvePoint/list Update curvePoint list page
      */
     @GetMapping(&quot;/curvePoint/delete/{id}&quot;)
     public String deleteBid(@PathVariable(&quot;id&quot;) Integer id, Model model)

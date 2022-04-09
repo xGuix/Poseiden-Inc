@@ -57,8 +57,8 @@ public class UserService
      * Find users with username :
      * Call to find user in repository
      *
-     * @Param  username String Username
-     * @Return  User Username
+     * @param  username String Username
+     * @return user User Username
      */
     public User findByUsername(String username)
     {
@@ -70,8 +70,8 @@ public class UserService
      * Add new user :
      * Save user, encrypt password and give USER role
      *
-     * @Param  User Username
-     * @Return  User User save
+     * @param  user Username
+     * @return User User save
      */
     public User addUser(User user)
     {
@@ -86,37 +86,39 @@ public class UserService
      * Verify existing User :
      * Check if user email already exists in database
      *
+     * @param user User
      * @return Message Information string
      */
     public String validateUser(User user)
     {
-<span class="nc" id="L93">        String message = &quot;Not Found&quot;;</span>
-<span class="nc" id="L94">        User userToFind = findByUsername(user.getUsername());</span>
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        if(userToFind !=null)</span>
+<span class="nc" id="L94">        String message = &quot;Not Found&quot;;</span>
+<span class="nc" id="L95">        User userToFind = findByUsername(user.getUsername());</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if(userToFind !=null)</span>
         {
-<span class="nc" id="L97">            message = &quot;Username already used!&quot;;</span>
+<span class="nc" id="L98">            message = &quot;Username already used!&quot;;</span>
         }
-<span class="nc" id="L99">        return message;</span>
+<span class="nc" id="L100">        return message;</span>
     }
 
     /**
      * Verify valid password for User :
      * Check if user password meet the requirements
      *
+     * @param password String password
      * @return validate Boolean true if password is valid
      */
     public Boolean validatePassword(String password)
     {
-<span class="nc" id="L110">        logger.info(&quot;Checking if password is valid&quot;);</span>
-<span class="nc" id="L111">        PasswordValidator validator = new PasswordValidator(Arrays.asList(</span>
+<span class="nc" id="L112">        logger.info(&quot;Checking if password is valid&quot;);</span>
+<span class="nc" id="L113">        PasswordValidator validator = new PasswordValidator(Arrays.asList(</span>
                 new LengthRule(8, 16),
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),
                 new CharacterRule(EnglishCharacterData.Digit, 1),
                 new CharacterRule(EnglishCharacterData.Special, 1)));
-<span class="nc" id="L116">        RuleResult result = validator.validate(new PasswordData(password));</span>
+<span class="nc" id="L118">        RuleResult result = validator.validate(new PasswordData(password));</span>
 
-<span class="nc" id="L118">        logger.debug(&quot;Password result: {}&quot;, result.isValid());</span>
-<span class="nc" id="L119">        return result.isValid();</span>
+<span class="nc" id="L120">        logger.debug(&quot;Password result: {}&quot;, result.isValid());</span>
+<span class="nc" id="L121">        return result.isValid();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

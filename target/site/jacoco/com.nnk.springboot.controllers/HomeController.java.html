@@ -24,11 +24,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 <span class="nc" id="L24">		return &quot;home&quot;;</span>
 	}
 
+	/**
+	 * Home admin page view
+	 *
+	 * @param model Model Interface
+	 * @return /bidList/list BidList page user list
+	 */
 	@RequestMapping(&quot;/admin/home&quot;)
 	public String adminHome(Model model)
 	{
-<span class="nc" id="L30">		logger.info(&quot;Admin access&quot;);</span>
-<span class="nc" id="L31">		return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L36">		logger.info(&quot;Admin access&quot;);</span>
+<span class="nc" id="L37">		return &quot;redirect:/bidList/list&quot;;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

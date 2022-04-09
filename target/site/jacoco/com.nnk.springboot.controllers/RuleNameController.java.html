@@ -65,7 +65,7 @@ import javax.validation.Valid;
      * @param ruleName RuleName ruleName
      * @param result BindingResult result
      * @param model Model ruleName
-     * @return ruleName/validate Validate ruleName page
+     * @return ruleName/list All ruleName list page
      */
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model)
@@ -133,7 +133,7 @@ import javax.validation.Valid;
      *
      * @param id Integer id
      * @param model Model ruleName
-     * @return redirect:/ruleName/list Update ruleName page
+     * @return redirect:/ruleName/list Update ruleName list page
      */
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model)

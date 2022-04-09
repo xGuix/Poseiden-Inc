@@ -8,15 +8,13 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Curve Service class
  */
 @Service
-@Transactional
-<span class="fc" id="L19">public class CurveService</span>
+<span class="fc" id="L17">public class CurveService</span>
 {
     /**
      *  Load Curve Point Repository
@@ -24,7 +22,7 @@ import java.util.List;
     @Autowired
     CurvePointRepository curvePointRepository;
 
-<span class="fc" id="L27">    private static final Logger logger = LogManager.getLogger(&quot;CurveServiceLog&quot;);</span>
+<span class="fc" id="L25">    private static final Logger logger = LogManager.getLogger(&quot;CurveServiceLog&quot;);</span>
 
     /**
      * Find list of all curve points :
@@ -34,8 +32,8 @@ import java.util.List;
      */
     public List&lt;CurvePoint&gt; findAll()
     {
-<span class="nc" id="L37">        logger.info(&quot;Find all curve point list&quot;);</span>
-<span class="nc" id="L38">        return curvePointRepository.findAll();</span>
+<span class="nc" id="L35">        logger.info(&quot;Find all curve point list&quot;);</span>
+<span class="nc" id="L36">        return curvePointRepository.findAll();</span>
     }
 
     /**
@@ -47,8 +45,8 @@ import java.util.List;
      */
     public CurvePoint findById(Integer id)
     {
-<span class="nc" id="L50">        logger.info(&quot;Find curve point by id: {}&quot;, id);</span>
-<span class="nc" id="L51">        return curvePointRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;CurvePoint&quot;, &quot;id&quot;));</span>
+<span class="nc" id="L48">        logger.info(&quot;Find curve point by id: {}&quot;, id);</span>
+<span class="nc" id="L49">        return curvePointRepository.findById(id).orElseThrow(()-&gt; new ObjectNotFoundException(&quot;CurvePoint&quot;, &quot;id&quot;));</span>
     }
 
     /**
@@ -60,8 +58,8 @@ import java.util.List;
      */
     public CurvePoint save(CurvePoint curvePoint)
     {
-<span class="nc" id="L63">        logger.info(&quot;Save curve point with id: {}&quot;, curvePoint.getCurveId());</span>
-<span class="nc" id="L64">        return curvePointRepository.save(curvePoint);</span>
+<span class="nc" id="L61">        logger.info(&quot;Save curve point with id: {}&quot;, curvePoint.getCurveId());</span>
+<span class="nc" id="L62">        return curvePointRepository.save(curvePoint);</span>
     }
 
     /**
@@ -69,13 +67,13 @@ import java.util.List;
      * Call to delete curve point in repository
      *
      * @param id Integer Curve id
-     * @Return Void No return
+     * Void No return
      */
     public void delete(Integer id)
     {
-<span class="nc" id="L76">        CurvePoint curvePointToDelete = findById(id);</span>
-<span class="nc" id="L77">        logger.info(&quot;Delete curve point with id: {}&quot;, curvePointToDelete.getCurveId());</span>
-<span class="nc" id="L78">        curvePointRepository.delete(curvePointToDelete);</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L74">        CurvePoint curvePointToDelete = findById(id);</span>
+<span class="nc" id="L75">        logger.info(&quot;Delete curve point with id: {}&quot;, curvePointToDelete.getCurveId());</span>
+<span class="nc" id="L76">        curvePointRepository.delete(curvePointToDelete);</span>
+<span class="nc" id="L77">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
