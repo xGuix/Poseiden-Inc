@@ -1,11 +1,13 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
 
+@Generated
 public class OAuth2Access implements OAuth2User
 {
     private OAuth2User oAuth2User;

@@ -1,10 +1,13 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
+@Generated
 public class User
 {
     @Id
@@ -27,6 +30,25 @@ public class User
     @NotBlank(message = "Role is mandatory")
     @Column(name = "role")
     private String role;
+
+    public User()
+    {}
+
+    public User(String username, String password, String fullname)
+    {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+    }
+
+    public User(Integer id, String username, String password, String fullname, String role)
+    {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     public Integer getId()
     {

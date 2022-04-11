@@ -1,6 +1,7 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,17 @@ public class RatingService
     RatingRepository ratingRepository;
 
     private static final Logger logger = LogManager.getLogger("RatingServiceLog");
+
+
+    /**
+     * Constructor Rating service
+     *
+     * @param ratingRepository BidList repository
+     */
+    public void setRatingRepository(RatingRepository ratingRepository)
+    {
+        this.ratingRepository = ratingRepository;
+    }
 
     /**
      * Find list of all ratings :

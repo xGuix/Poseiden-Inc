@@ -2,6 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import groovy.transform.Generated;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Collections;
  * Class Access User Detail Service
  */
 @Service
+@Generated
 public class AccessUserDetailService implements UserDetailsService
 {
     private static final Logger logger = LogManager.getLogger("AccessUserDetailServiceLog");

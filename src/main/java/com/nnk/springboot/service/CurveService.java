@@ -25,6 +25,17 @@ public class CurveService
     private static final Logger logger = LogManager.getLogger("CurveServiceLog");
 
     /**
+     * Constructor Curve Point service
+     *
+     * @param curvePointRepository CurvePoint repository
+     */
+    public void setCurvePointRepository(CurvePointRepository curvePointRepository)
+    {
+        this.curvePointRepository = curvePointRepository;
+    }
+
+
+    /**
      * Find list of all curve points :
      * Call to find curve in repository
      *

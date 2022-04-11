@@ -1,6 +1,7 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,16 @@ public class RuleNameService
     RuleNameRepository ruleNameRepository;
 
     private static final Logger logger = LogManager.getLogger("RuleNameServiceLog");
+
+    /**
+     * Constructor RuleName service
+     *
+     * @param ruleNameRepository RuleName repository
+     */
+    public void setRuleNameRepository(RuleNameRepository ruleNameRepository)
+    {
+        this.ruleNameRepository = ruleNameRepository;
+    }
 
     /**
      * Find list of all rule name :

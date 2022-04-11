@@ -1,11 +1,14 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "rule_name")
+@Generated
 public class RuleName
 {
     @Id

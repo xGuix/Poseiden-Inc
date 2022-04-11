@@ -1,9 +1,12 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "rating")
+@Generated
 public class Rating
 {
     @Id

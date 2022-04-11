@@ -3,12 +3,14 @@ package com.nnk.springboot.integration;
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.service.AccessUserDetailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.Model;
 
@@ -21,15 +23,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class BidListTestIT
 {
 	@Autowired
-	private BidListController bidListController;
+	AccessUserDetailService accessUserDetailService;
 
 	@Autowired
-	private BidListRepository bidListRepository;
+	BidListController bidListController;
+
+	@Autowired
+	BidListRepository bidListRepository;
 
 	BidList bid = new BidList();
 
 	@BeforeEach
-	public void setupTest()
+	void setupTest()
 	{
 		bid.setAccount("Account Test");
 		bid.setType("Type Test");
@@ -75,7 +80,7 @@ class BidListTestIT
 		Integer id = bid.getBidListId();
 		bidListRepository.delete(bid);
 		List<BidList> bidList = bidListRepository.findAll();
-		assertFalse(bidList.get(bid.getBidListId()).equals(bid));
+		assertNotEquals(bidList.get(bid.getBidListId()), bid);
 		assertFalse(bidListRepository.existsById(id));
 	}
 }

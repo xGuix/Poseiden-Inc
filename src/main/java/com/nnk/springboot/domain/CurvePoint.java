@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "curve_point")
+@Generated
 public class CurvePoint
 {
     @Id
@@ -33,7 +35,7 @@ public class CurvePoint
     public CurvePoint()
     {}
 
-    public CurvePoint(Integer id, Integer curveId, double term, double value)
+    public CurvePoint(Integer curveId, double term, double value)
     {}
 
     public CurvePoint(Integer id,

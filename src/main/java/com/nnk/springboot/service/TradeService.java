@@ -1,6 +1,7 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.TradeRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,16 @@ public class TradeService
     TradeRepository tradeRepository;
 
     private static final Logger logger = LogManager.getLogger("TradeServiceLog");
+
+    /**
+     * Constructor Trade service
+     *
+     * @param tradeRepository Trade repository
+     */
+    public void setTradeRepository(TradeRepository tradeRepository)
+    {
+        this.tradeRepository = tradeRepository;
+    }
 
     /**
      * Find list of all trade :

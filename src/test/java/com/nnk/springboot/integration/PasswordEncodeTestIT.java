@@ -11,7 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class PasswordEncodeTestIT
 {
     @Test
-    public void testPassword() {
+    public void testPassword()
+    {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String pw = encoder.encode("123456");
         System.out.println("[ "+ pw + " ]");

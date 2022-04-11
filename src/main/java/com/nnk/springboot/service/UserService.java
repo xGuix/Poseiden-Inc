@@ -2,6 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import groovy.transform.Generated;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.passay.*;
@@ -32,7 +33,7 @@ public class UserService
      *
      * @param userRepository User repository
      */
-    public UserService(UserRepository userRepository)
+    public void setUserRepository(UserRepository userRepository)
     {
         this.userRepository = userRepository;
     }
@@ -43,6 +44,7 @@ public class UserService
      * @param username String username
      * @return UserDetails User details
      */
+    @Generated
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         User user = userRepository.findByUsername(username);

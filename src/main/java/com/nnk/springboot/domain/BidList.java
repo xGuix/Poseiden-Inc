@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import groovy.transform.Generated;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.lang.NonNull;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bid_list")
+@Generated
 public class BidList
 {
     @Id
