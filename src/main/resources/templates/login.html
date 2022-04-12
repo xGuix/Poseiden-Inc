@@ -20,7 +20,7 @@
 		    	</button>
 				<div class="collapse navbar-collapse" id="navbar">
 					<div class="navbar-nav">
-						<a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}"> USERS </a>
+						<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" th:href="@{/user/list}"> USERS </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a>
@@ -67,7 +67,6 @@
 					   		<label for="password" class="form-label"> Password </label>
 					    	<input type="password" class="form-control text-center" id="password" name="password" placeholder="Enter password">
 					 	</div>
-					  	<br>
 					 	 <!-- Login button -->
 					 	<div class="d-grid gap-2 col-6 mx-auto">
 					  		<button type="submit" name="login-submit" id="login-submit" class="btn btn-dark"> Login </button>

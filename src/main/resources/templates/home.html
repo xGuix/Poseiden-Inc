@@ -20,29 +20,36 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbar">
-                        <ul class="navbar-nav">
-                            <li><a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/user/list}"> USERS </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/trade/list}"> TRADE </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/ruleName/list}"> RULE </a></li>
-                            <li><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}"> logout </a></li>
-                        </ul>
+                        <div class="navbar-nav">
+                            <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" th:href="@{/user/list}"> USERS </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/trade/list}"> TRADE </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/ruleName/list}"> RULE </a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}"> logout </a>
+                        </div>
                     </div>
                 </div>
             </nav>
             <div class="row" style="font-size:0.8em"> Logged in user: <b th:inline="text"  class="user">[[${#httpServletRequest.remoteUser}]]</b></div>
+            <br><br>
             <br><br><br>
-            <br><br><br>
-            <br><br><br>
+            <br><br>
             <div class="container-fluid ">
                 <div class="row justify-content-md-center" >
                     <div class="col-lg-auto text-center">
-                        <h3> Welcome to you <br> [[${#httpServletRequest.remoteUser}]] </h3>
+                        <h3> Welcome to you: </h3>
+                        <h3> [[${#httpServletRequest.remoteUser}]] </h3>
                         <br>
                         <p> Thank you for using poseiden-inc </p>
-                        <a href="/login">Login</a> or create one <a href="/user/list">User management</a>
+                        <br>
+                        <div class="col-10 gap-2 mx-auto" sec:authorize="hasAuthority('ADMIN')">
+                            <h5> USER MANAGER </h5>
+                            <a class="btn btn-dark btn-sm" th:href="@{/user/list}"> Create users </a>
+                            <br><br>
+                        </div>
+                        <a class="btn btn-danger btn-sm" href="/login"> Login users </a>
                     </div>
                 </div>
             </div>
