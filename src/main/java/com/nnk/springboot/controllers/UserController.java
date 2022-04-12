@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.service.UserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +23,12 @@ import javax.validation.Valid;
 @Controller
 public class UserController
 {
+    /**
+     *  Load User Service
+     */
+    @Autowired
+    private UserService userService;
+
     /**
      *  Load User Repository
      */
@@ -70,11 +77,22 @@ public class UserController
     {
         if (!result.hasErrors())
         {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
+            if(userService.validateUser(user).equals("Not Found"))
+            {
+                if(userService.validatePassword(user.getPassword()))
+                {
+                    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                    user.setPassword(encoder.encode(user.getPassword()));
+                    userRepository.save(user);
+                    model.addAttribute("users", userRepository.findAll());
+                    return "redirect:/user/list";
+                }
+                model.addAttribute("passwordError", "Invalid password:" +
+                        " it should contain between 8 min and 16 max characters with 1 uppercase, 1 digits and 1 special character");
+                return "user/add";
+            }
+            model.addAttribute("usernameError", "Invalid username already used. Please retry!");
+            return "user/add";
         }
         return "user/add";
     }

@@ -19,7 +19,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbar">
 					<div class="navbar-nav">
-						<a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}"> USERS </a>
+						<a class="nav-link" sec:authorize="hasAuthority('ADMIN')" th:href="@{/user/list}"> USERS </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/bidList/list}"> BID LIST </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/curvePoint/list}"> CURVE POINT </a>
 						<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/rating/list}"> RATING </a>
