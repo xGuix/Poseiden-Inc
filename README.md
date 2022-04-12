@@ -1,10 +1,12 @@
 # Ψրօʂεἶძεղ
 **Online Trading Platform**
 
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development
 and testing purposes.</br>
 See deployment for notes on how to deploy the project on a live system.
+
 
 ### App built with
 What things you need to install this App
@@ -19,6 +21,7 @@ What things you need to install this App
 8. Maven
 9. JUnit 5
 10. Log4j
+
 
 ### Installing
 A step by step series of examples that tell you how to get a development env running:
@@ -51,15 +54,9 @@ Schemas are provided in folder :
 
 <img src="https://github.com/xGuix/Poseiden-Inc/blob/master/doc/Poseiden-DomainModel.jpg" alt="classDiagram"/>
 
-
 **UML DATA**
 
 <img src="https://github.com/xGuix/Poseiden-Inc/blob/master/doc/Poseiden-ModelPhysique.jpg" alt="dataDiagram"/>
-
-
-**UML SCHEMA**
-
-<img src="https://github.com/xGuix/Poseiden-Inc/blob/master/doc/Poseiden-ClassDiagram.jpg" alt="dataDiagram"/>
 
 
 ## Setup with Intellij IDE
