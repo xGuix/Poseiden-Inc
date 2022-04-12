@@ -57,11 +57,6 @@ Schemas are provided in folder :
 <img src="https://github.com/xGuix/Poseiden-Inc/blob/master/doc/Poseiden-ModelPhysique.jpg" alt="dataDiagram"/>
 
 
-**UML SCHEMA**
-
-<img src="https://github.com/xGuix/Poseiden-Inc/blob/master/doc/Poseiden-ClassDiagram.jpg" alt="dataDiagram"/>
-
-
 ## Setup with Intellij IDE
 1. Create project from Initialize: File > New > project > Spring Initialize
 2. Add lib repository into pom.xml
