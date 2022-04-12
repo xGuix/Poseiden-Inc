@@ -4,6 +4,7 @@ import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.AccessUserDetailService;
+import com.nnk.springboot.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,16 +30,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UserController.class)
-public class userControllerTest
+class userControllerTest
 {
+    @Autowired
+    MockMvc mockMvc;
+
     @MockBean
     AccessUserDetailService accessUserDetailService;
 
     @MockBean
-    UserRepository userRepository;
+    UserService userService;
 
-    @Autowired
-    MockMvc mockMvc;
+    @MockBean
+    UserRepository userRepository;
 
     User user;
     List<User> findAll;
@@ -48,7 +52,7 @@ public class userControllerTest
     {
         user = new User(1,"xGuix","Admin!123","Guix Debrens","ADMIN");
         findAll = new ArrayList<>(Arrays.asList(new User(1,"xGuix","Admin!123","Guix Debrens","ADMIN"),
-                new User(2,"BOB51","Bob51!123","Bob Lazar","USER")));
+                new User(2,"BOB51","Bob51!123","Bob Lazar","ADMIN")));
     }
 
     @Test
@@ -69,19 +73,22 @@ public class userControllerTest
     @Test
     void validateTest() throws Exception
     {
+        Mockito.when(userService.validateUser(user)).thenReturn("Not Found");
+        Mockito.when(userService.validatePassword("Admin!123")).thenReturn(true);
         Mockito.when(userRepository.save(user)).thenReturn(user);
         Mockito.when(userRepository.findAll()).thenReturn(findAll);
 
         mockMvc.perform(post("/user/validate")
-                .with(user("admin")
-                        .roles("USER","ADMIN")
-                        .authorities(new SimpleGrantedAuthority("ADMIN")))
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("username","username")
-                .param("password","user")
-                .param("fullname","full name")
-                .param("role","ADMIN")
-                .with(csrf())).andExpect(redirectedUrl("/user/list"));
+                        .with(user("xGuix")
+                                .roles("USER","ADMIN")
+                                .authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("username","xGuix")
+                .param("password","Admin!123")
+                .param("fullname","Guix Debrens")
+                .param("role","ADMIN"))
+                .andExpect(status().isForbidden())
+                .andExpect(redirectedUrl("/user/list"));
     }
 
     @Test
@@ -124,7 +131,8 @@ public class userControllerTest
                 .param("password","user")
                 .param("fullname","full name")
                 .param("role","ADMIN")
-                .with(csrf())).andExpect(redirectedUrl("/user/list"));
+                .with(csrf()))
+                .andExpect(redirectedUrl("/user/list"));
     }
 
     @Test
