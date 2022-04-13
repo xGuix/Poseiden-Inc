@@ -15,7 +15,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 
 @UtilityClass
-public class AuthentificationTest
+class AuthentificationTest
 {
     @Retention(RetentionPolicy.RUNTIME)
     @WithSecurityContext(factory = WithUserAuthSecurityContextFactory.class)

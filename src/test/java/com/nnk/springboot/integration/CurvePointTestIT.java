@@ -10,17 +10,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
+@WithMockUser(username = "xGuix")
 public class CurvePointTestIT
 {
 	@Autowired
@@ -33,20 +34,32 @@ public class CurvePointTestIT
 	CurvePointRepository curvePointRepository;
 
 	CurvePoint curvePoint;
+	CurvePoint curveToTest;
 
 	@BeforeEach
 	void setupTest()
 	{
-		curvePoint = new CurvePoint(10, 10d, 30d);
+		curvePoint = new CurvePoint();
+		curvePoint.setCurveId(10);
+		curvePoint.setTerm(10d);
+		curvePoint.setValue(30d);
 	}
 
 	@Test
 	void curvePointSaveTest()
 	{
 		// Save
-		curvePoint = curvePointRepository.save(curvePoint);
-		assertNotNull(curvePoint.getId());
-		assertEquals(10, curvePoint.getCurveId());
+		String addCurveForm = curveController.addBidForm(curvePoint);
+		List<CurvePoint> curvePointList = curvePointRepository.findAll();
+
+		curveToTest = curvePointList.get(0);
+
+		assertEquals("curvePoint/add", addCurveForm);
+		assertNotNull(curvePointList);
+		assertTrue(curvePointList.size()==1);
+		assertEquals(20, curveToTest.getCurveId());
+		assertEquals(10d, curveToTest.getTerm());
+		assertEquals(30d, curveToTest.getValue());
 	}
 
 	@Test
@@ -54,7 +67,8 @@ public class CurvePointTestIT
 	{
 		// Update
 		curvePoint.setCurveId(20);
-		curvePoint = curvePointRepository.save(curvePoint);
+		curveToTest = curvePointRepository.save(curvePoint);
+
 		assertEquals(20, curvePoint.getCurveId());
 	}
 
@@ -63,16 +77,22 @@ public class CurvePointTestIT
 	{
 		// Find
 		List<CurvePoint> listResult = curvePointRepository.findAll();
-		assertTrue(listResult.size() > 0);
+
+		assertTrue(listResult.size() == 0);
 	}
 
 	@Test
 	void curvePointDeleteTest()
 	{
 		// Delete
-		Integer id = curvePoint.getId();
-		curvePointRepository.delete(curvePoint);
-		Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
-		assertFalse(curvePointList.isPresent());
+		curvePointRepository.save(curvePoint);
+		List<CurvePoint> curveListTest = curvePointRepository.findAll();
+		curveToTest = curveListTest.get(0);
+
+		curvePointRepository.delete(curveToTest);
+		List<CurvePoint> testResult = curvePointRepository.findAll();
+
+		assertEquals(0, testResult.size());
+		assertTrue(testResult.isEmpty());
 	}
 }
