@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UserController.class)
+@ActiveProfiles("test")
 class userControllerTest
 {
     @Autowired
@@ -45,20 +48,22 @@ class userControllerTest
     UserRepository userRepository;
 
     User user;
+    User newUser;
     List<User> findAll;
 
     @BeforeEach
     void setupTest()
     {
-        user = new User(1,"xGuix","Admin!123","Guix Debrens","ADMIN");
+        user = new User(1,"BOB-MUSIC","Ragga!123","Bob Marley","ADMIN");
         findAll = new ArrayList<>(Arrays.asList(new User(1,"xGuix","Admin!123","Guix Debrens","ADMIN"),
                 new User(2,"BOB51","Bob51!123","Bob Lazar","ADMIN")));
+        newUser = new User(1,"userTest","TEST!123","fullNameTest","ADMIN");
     }
 
     @Test
     void homeTest() throws Exception
     {
-        Mockito.when(userRepository.findAll()).thenReturn(findAll);
+        when(userRepository.findAll()).thenReturn(findAll);
 
         mockMvc.perform(get("/user/list")
                         .with(user("admin")
@@ -73,22 +78,21 @@ class userControllerTest
     @Test
     void validateTest() throws Exception
     {
-        Mockito.when(userService.validateUser(user)).thenReturn("Not Found");
-        Mockito.when(userService.validatePassword("Admin!123")).thenReturn(true);
-        Mockito.when(userRepository.save(user)).thenReturn(user);
-        Mockito.when(userRepository.findAll()).thenReturn(findAll);
+        when(userService.validateUser(newUser)).thenReturn("Not Found");
+        when(userService.validatePassword("TEST!123")).thenReturn(true);
+        when(userRepository.save(newUser)).thenReturn(newUser);
+        when(userRepository.findAll()).thenReturn(findAll);
 
         mockMvc.perform(post("/user/validate")
                         .with(user("xGuix")
-                                .roles("USER","ADMIN")
+                                .roles("ADMIN")
                                 .authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("username","xGuix")
-                .param("password","Admin!123")
-                .param("fullname","Guix Debrens")
+                .param("username","userTest")
+                .param("password","TEST!123")
+                .param("fullname","fullNameTest")
                 .param("role","ADMIN"))
                 .andExpect(status().isForbidden())
-                .andExpect(redirectedUrl("/user/list"));
+                .andExpect(redirectedUrl(null));
     }
 
     @Test
@@ -105,7 +109,7 @@ class userControllerTest
     @Test
     void showUpdateFormTest() throws Exception
     {
-        Mockito.when(userRepository.findById(1)).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findById(1)).thenReturn(java.util.Optional.of(user));
 
         mockMvc.perform(get("/user/update/1")
                         .with(user("admin")
@@ -120,7 +124,7 @@ class userControllerTest
     @Test
     void updateUserTest() throws Exception
     {
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(user)).thenReturn(user);
 
         mockMvc.perform(post("/user/update/1")
                 .with(user("admin")
@@ -138,8 +142,8 @@ class userControllerTest
     @Test
     void deleteUserTest() throws Exception
     {
-        Mockito.when(userRepository.findById(1)).thenReturn(java.util.Optional.of(user));
-        Mockito.when(userRepository.findAll()).thenReturn(findAll);
+        when(userRepository.findById(1)).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findAll()).thenReturn(findAll);
         Mockito.doNothing().when(userRepository).delete(user);
 
         mockMvc.perform(get("/user/delete/1")
