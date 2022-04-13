@@ -35,6 +35,7 @@ public class TradeTestIT
 	TradeRepository tradeRepository;
 
 	Trade trade;
+	Trade tradeToTest;
 
 	@BeforeEach
 	void setupTest()
@@ -44,16 +45,24 @@ public class TradeTestIT
 		trade.setAccount("Trade Account Test");
 		trade.setType("Type Test");
 		trade.setBuyQuantity(1000d);
+		tradeRepository.save(trade);
 	}
 
 	@Test
 	void tradeSaveTest()
 	{
 		// Save
-		tradeController.addTradeForm(trade);
-		List<Trade> tradeToFind = tradeRepository.findAll();
-		assertNotNull(trade.getTradeId());
-		assertEquals(trade, tradeToFind.get(0));
+		String addTradeForm = tradeController.addTradeForm(trade);
+		List<Trade> tradeListTest = tradeRepository.findAll();
+
+		tradeToTest = tradeListTest.get(0);
+
+		assertEquals("trade/add", addTradeForm);
+		assertNotNull(tradeListTest);
+		assertTrue(tradeListTest.size() > 0);
+		assertEquals("Trade Account Test", tradeToTest.getAccount());
+		assertEquals("Type Test", tradeToTest.getType());
+		assertEquals(1000d, tradeToTest.getBuyQuantity());
 	}
 
 	@Test
