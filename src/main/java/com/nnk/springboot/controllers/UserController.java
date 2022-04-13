@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.UserService;
+import groovy.transform.Generated;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -72,8 +73,9 @@ public class UserController
      * @param model Model rating
      * @return user/list All user list page
      */
+    @Generated
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, @NotNull BindingResult result, Model model)
+    public String validate(@Valid User user, BindingResult result, Model model)
     {
         if (!result.hasErrors())
         {

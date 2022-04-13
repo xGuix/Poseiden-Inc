@@ -55,7 +55,7 @@ class BidListTestIT
 
 		assertEquals("bidList/add", addBidForm);
 		assertNotNull(bidListTest);
-		assertTrue(bidListTest.size()==1);
+		assertEquals(1, bidListTest.size());
 		assertEquals("Account Test", bidToTest.getAccount());
 		assertEquals("Type Test", bidToTest.getType());
 		assertEquals(20d, bidToTest.getBidQuantity());

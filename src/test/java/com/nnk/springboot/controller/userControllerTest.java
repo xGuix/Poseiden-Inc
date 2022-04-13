@@ -12,8 +12,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -54,10 +58,10 @@ class userControllerTest
     @BeforeEach
     void setupTest()
     {
-        user = new User(1,"BOB-MUSIC","Ragga!123","Bob Marley","ADMIN");
         findAll = new ArrayList<>(Arrays.asList(new User(1,"xGuix","Admin!123","Guix Debrens","ADMIN"),
                 new User(2,"BOB51","Bob51!123","Bob Lazar","ADMIN")));
-        newUser = new User(1,"userTest","TEST!123","fullNameTest","ADMIN");
+        user = new User(3,"BOB-MUSIC","Ragga!123","Bob Marley","ADMIN");
+        newUser = new User(4,"userTest","TEST!123","fullNameTest","ADMIN");
     }
 
     @Test
@@ -78,17 +82,12 @@ class userControllerTest
     @Test
     void validateTest() throws Exception
     {
-        when(userService.validateUser(newUser)).thenReturn("Not Found");
-        when(userService.validatePassword("TEST!123")).thenReturn(true);
-        when(userRepository.save(newUser)).thenReturn(newUser);
-        when(userRepository.findAll()).thenReturn(findAll);
-
         mockMvc.perform(post("/user/validate")
                         .with(user("xGuix")
                                 .roles("ADMIN")
                                 .authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
                 .param("username","userTest")
-                .param("password","TEST!123")
+                .param("password", "TEST!123")
                 .param("fullname","fullNameTest")
                 .param("role","ADMIN"))
                 .andExpect(status().isForbidden())
